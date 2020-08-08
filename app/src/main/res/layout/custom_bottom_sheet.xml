@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:paddingStart="20dp"
+    android:paddingEnd="0dp">
+
+    <LinearLayout
+        android:id="@+id/action_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="@dimen/bottom_sheet_icon"
+            android:layout_height="@dimen/bottom_sheet_icon"
+            android:layout_gravity="center"
+            android:contentDescription="@string/action_edit"
+            android:src="@drawable/ic_baseline_edit_24"
+            android:tint="@android:color/holo_blue_light" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/action_edit"
+            android:textColor="@android:color/black" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/action_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="@dimen/bottom_sheet_icon"
+            android:layout_height="@dimen/bottom_sheet_icon"
+            android:layout_gravity="center"
+            android:contentDescription="@string/action_delete"
+            android:src="@drawable/ic_baseline_delete_24"
+            android:tint="@android:color/holo_red_dark" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/action_delete"
+            android:textColor="@android:color/black" />
+    </LinearLayout>
+
+</LinearLayout>

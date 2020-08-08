@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Room Example</string>
+
+    <string name="hint_name">Name…</string>
+    <string name="button_save">Save</string>
+    <string name="job">Job</string>
+    <string name="hint_job">Job…</string>
+    <string name="hint_city">City…</string>
+    <string name="action_edit">Edit</string>
+    <string name="action_delete">Delete</string>
+    <string name="arg_id">id</string>
+    <string name="arg_name">name</string>
+    <string name="arg_job">job</string>
+    <string name="arg_city">city</string>
+
+</resources>
