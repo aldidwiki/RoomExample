@@ -1,6 +1,8 @@
-package com.aldidwikip.roomexamples.repository
+package com.aldidwikip.roomexamples.data
 
 import androidx.lifecycle.LiveData
+import com.aldidwikip.roomexamples.data.model.Word
+import com.aldidwikip.roomexamples.data.room.WordDao
 
 class WordRepository(private val wordDao: WordDao) {
 
@@ -14,7 +16,7 @@ class WordRepository(private val wordDao: WordDao) {
         wordDao.delete(id)
     }
 
-    suspend fun update(id: Int, name: String, job: String, city: String) {
-        wordDao.update(id, name, job, city)
+    suspend fun update(id: Int, name: String, gender: String, job: String, city: String) {
+        wordDao.update(id, name, gender, job, city)
     }
 }

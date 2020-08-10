@@ -21,6 +21,13 @@
             tools:text="Name" />
 
         <TextView
+            android:id="@+id/tv_gender"
+            style="@style/word_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Gender" />
+
+        <TextView
             android:id="@+id/tv_job"
             style="@style/word_title"
             android:layout_width="wrap_content"

@@ -1,10 +1,11 @@
-package com.aldidwikip.roomexamples.repository
+package com.aldidwikip.roomexamples.data.room
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.aldidwikip.roomexamples.data.model.Word
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -26,9 +27,9 @@ abstract class WordRoomDatabase : RoomDatabase() {
 
         suspend fun populateDatabase(wordDao: WordDao) {
             // Add sample words.
-            var word = Word(0, "Dave", "Chef", "Delhi")
+            var word = Word(0, "Dave", "Male", "Chef", "Delhi")
             wordDao.insert(word)
-            word = Word(0, "Simon", "Police", "New York City")
+            word = Word(0, "Simon", "Male", "Police", "New York City")
             wordDao.insert(word)
         }
     }
@@ -38,7 +39,8 @@ abstract class WordRoomDatabase : RoomDatabase() {
         private var INSTANCE: WordRoomDatabase? = null
 
         fun getDatabase(context: Context, scope: CoroutineScope): WordRoomDatabase {
-            val tempInstance = INSTANCE
+            val tempInstance =
+                    INSTANCE
             if (tempInstance != null) {
                 return tempInstance
             }

@@ -1,4 +1,4 @@
-package com.aldidwikip.roomexamples.adapter
+package com.aldidwikip.roomexamples.ui.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,9 +7,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.aldidwikip.roomexamples.R
-import com.aldidwikip.roomexamples.repository.Word
+import com.aldidwikip.roomexamples.data.model.Word
 
-class WordListAdapter internal constructor(context: Context) : RecyclerView.Adapter<WordListAdapter.WordViewHolder>() {
+class WordListAdapter internal constructor(context: Context) :
+        RecyclerView.Adapter<WordListAdapter.WordViewHolder>() {
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     private var words = emptyList<Word>()
@@ -29,9 +30,7 @@ class WordListAdapter internal constructor(context: Context) : RecyclerView.Adap
     override fun onBindViewHolder(holder: WordViewHolder, position: Int) {
         val current = words[position]
         with(holder) {
-            wordItemView.text = current.name
-            jobItemView.text = current.job
-            cityItemView.text = current.city
+            bind(current)
 
             itemView.setOnClickListener {
                 onItemClickCallback.onItemClick(words[adapterPosition])
@@ -45,9 +44,17 @@ class WordListAdapter internal constructor(context: Context) : RecyclerView.Adap
     }
 
     inner class WordViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val wordItemView: TextView = itemView.findViewById(R.id.tv_name)
-        val jobItemView: TextView = itemView.findViewById(R.id.tv_job)
-        val cityItemView: TextView = itemView.findViewById(R.id.tv_city)
+        private val nameItemView: TextView = itemView.findViewById(R.id.tv_name)
+        private val genderItemView: TextView = itemView.findViewById(R.id.tv_gender)
+        private val jobItemView: TextView = itemView.findViewById(R.id.tv_job)
+        private val cityItemView: TextView = itemView.findViewById(R.id.tv_city)
+
+        fun bind(data: Word) {
+            nameItemView.text = data.name
+            genderItemView.text = data.gender
+            jobItemView.text = data.job
+            cityItemView.text = data.city
+        }
     }
 
     interface OnItemClickCallback {

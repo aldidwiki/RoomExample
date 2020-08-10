@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.aldidwikip.roomexamples.fragment.HomeFragment"
+        android:name="com.aldidwikip.roomexamples.ui.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home">
 
@@ -16,6 +16,9 @@
             app:argType="integer" />
         <argument
             android:name="@string/arg_name"
+            app:argType="string" />
+        <argument
+            android:name="@string/arg_gender"
             app:argType="string" />
         <argument
             android:name="@string/arg_job"
@@ -42,7 +45,7 @@
 
     <fragment
         android:id="@+id/insertFragment"
-        android:name="com.aldidwikip.roomexamples.fragment.InsertFragment"
+        android:name="com.aldidwikip.roomexamples.ui.insert.InsertFragment"
         android:label="fragment_insert"
         tools:layout="@layout/fragment_insert">
 
@@ -59,7 +62,7 @@
 
     <fragment
         android:id="@+id/editFragment"
-        android:name="com.aldidwikip.roomexamples.fragment.EditFragment"
+        android:name="com.aldidwikip.roomexamples.ui.edit.EditFragment"
         android:label="fragment_edit"
         tools:layout="@layout/fragment_edit">
 

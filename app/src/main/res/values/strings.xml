@@ -10,7 +10,12 @@
     <string name="action_delete">Delete</string>
     <string name="arg_id">id</string>
     <string name="arg_name">name</string>
+    <string name="arg_gender">gender</string>
     <string name="arg_job">job</string>
     <string name="arg_city">city</string>
+    <string name="error_message">Value must not empty</string>
+    <string name="gender">Gender :</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
 
 </resources>

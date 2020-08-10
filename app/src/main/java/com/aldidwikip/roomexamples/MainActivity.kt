@@ -1,4 +1,4 @@
-package com.aldidwikip.roomexamples.activity
+package com.aldidwikip.roomexamples
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

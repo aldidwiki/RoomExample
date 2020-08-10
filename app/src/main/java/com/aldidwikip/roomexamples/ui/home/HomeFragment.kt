@@ -1,4 +1,4 @@
-package com.aldidwikip.roomexamples.fragment
+package com.aldidwikip.roomexamples.ui.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,25 +12,24 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.customview.customView
 import com.aldidwikip.roomexamples.R
 import com.aldidwikip.roomexamples.RoomExample
-import com.aldidwikip.roomexamples.adapter.WordListAdapter
-import com.aldidwikip.roomexamples.repository.Word
+import com.aldidwikip.roomexamples.data.model.Word
+import com.aldidwikip.roomexamples.ui.adapter.WordListAdapter
 import com.aldidwikip.roomexamples.utils.Constant.ARG_CITY
+import com.aldidwikip.roomexamples.utils.Constant.ARG_GENDER
 import com.aldidwikip.roomexamples.utils.Constant.ARG_ID
 import com.aldidwikip.roomexamples.utils.Constant.ARG_JOB
 import com.aldidwikip.roomexamples.utils.Constant.ARG_NAME
-import com.aldidwikip.roomexamples.viewmodel.WordViewModel
 import kotlinx.android.synthetic.main.custom_bottom_sheet.*
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment(), WordListAdapter.OnItemClickCallback {
-    private lateinit var wordViewModel: WordViewModel
+    private lateinit var homeViewModel: HomeViewModel
     private lateinit var navController: NavController
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -40,19 +39,20 @@ class HomeFragment : Fragment(), WordListAdapter.OnItemClickCallback {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        wordViewModel = ViewModelProvider(this).get(WordViewModel::class.java)
+        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         navController = Navigation.findNavController(view)
 
-        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerview)
-        val adapter = WordListAdapter(RoomExample.context)
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(RoomExample.context)
-        adapter.setOnItemClickCallback(this)
+        val rvAdapter = WordListAdapter(RoomExample.context)
+        rvAdapter.setOnItemClickCallback(this)
+        recyclerview.apply {
+            adapter = rvAdapter
+            layoutManager = LinearLayoutManager(RoomExample.context)
+        }
 
-        wordViewModel.allWords.observe(viewLifecycleOwner, Observer { words ->
+        homeViewModel.allWords.observe(viewLifecycleOwner, Observer { words ->
             // Update the cached copy of the words in the adapter.
             words?.let {
-                adapter.setWords(it)
+                rvAdapter.setWords(it)
             }
         })
 
@@ -67,7 +67,7 @@ class HomeFragment : Fragment(), WordListAdapter.OnItemClickCallback {
             customView(R.layout.custom_bottom_sheet)
 
             action_delete.setOnClickListener {
-                wordViewModel.delete(data.id)
+                homeViewModel.delete(data.id)
                 Toast.makeText(RoomExample.context, "${data.name} Deleted", Toast.LENGTH_SHORT).show()
                 dismiss()
             }
@@ -75,6 +75,7 @@ class HomeFragment : Fragment(), WordListAdapter.OnItemClickCallback {
             action_edit.setOnClickListener {
                 val bundle = bundleOf(
                         ARG_ID to data.id,
+                        ARG_GENDER to data.gender,
                         ARG_NAME to data.name,
                         ARG_JOB to data.job,
                         ARG_CITY to data.city

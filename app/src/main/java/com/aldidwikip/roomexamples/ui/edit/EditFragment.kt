@@ -1,4 +1,4 @@
-package com.aldidwikip.roomexamples.fragment
+package com.aldidwikip.roomexamples.ui.edit
 
 import android.os.Bundle
 import android.text.TextUtils
@@ -14,14 +14,14 @@ import com.aldidwikip.roomexamples.R
 import com.aldidwikip.roomexamples.RoomExample
 import com.aldidwikip.roomexamples.utils.AppUtils.showErrorMessage
 import com.aldidwikip.roomexamples.utils.Constant.ARG_CITY
+import com.aldidwikip.roomexamples.utils.Constant.ARG_GENDER
 import com.aldidwikip.roomexamples.utils.Constant.ARG_ID
 import com.aldidwikip.roomexamples.utils.Constant.ARG_JOB
 import com.aldidwikip.roomexamples.utils.Constant.ARG_NAME
-import com.aldidwikip.roomexamples.viewmodel.WordViewModel
 import kotlinx.android.synthetic.main.fragment_edit.*
 
 class EditFragment : Fragment() {
-    private lateinit var wordViewModel: WordViewModel
+    private lateinit var editViewModel: EditViewModel
     private lateinit var navController: NavController
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -31,11 +31,13 @@ class EditFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        wordViewModel = ViewModelProvider(this).get(WordViewModel::class.java)
+        editViewModel = ViewModelProvider(this).get(EditViewModel::class.java)
         navController = Navigation.findNavController(view)
 
         val id = arguments?.getInt(ARG_ID)
+        val gender = arguments?.getString(ARG_GENDER)
         edit_name.setText(arguments?.getString(ARG_NAME))
+        rb_group_gender.check(if (gender == "Male") R.id.rb_male else R.id.rb_female)
         edit_job.setText(arguments?.getString(ARG_JOB))
         edit_city.setText(arguments?.getString(ARG_CITY))
 
@@ -45,9 +47,10 @@ class EditFragment : Fragment() {
                 TextUtils.isEmpty(edit_job.text) -> edit_job.showErrorMessage()
                 TextUtils.isEmpty(edit_city.text) -> edit_city.showErrorMessage()
                 else -> {
-                    wordViewModel.update(
+                    editViewModel.update(
                             id!!,
                             edit_name.text.toString(),
+                            if (rb_male.isChecked) rb_male.text.toString() else rb_female.text.toString(),
                             edit_job.text.toString(),
                             edit_city.text.toString()
                     )
@@ -57,5 +60,4 @@ class EditFragment : Fragment() {
             }
         }
     }
-
 }
