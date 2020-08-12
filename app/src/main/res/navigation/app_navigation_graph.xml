@@ -14,18 +14,6 @@
         <argument
             android:name="@string/arg_id"
             app:argType="integer" />
-        <argument
-            android:name="@string/arg_name"
-            app:argType="string" />
-        <argument
-            android:name="@string/arg_gender"
-            app:argType="string" />
-        <argument
-            android:name="@string/arg_job"
-            app:argType="string" />
-        <argument
-            android:name="@string/arg_city"
-            app:argType="string" />
 
         <action
             android:id="@+id/action_homeFragment_to_insertFragment"

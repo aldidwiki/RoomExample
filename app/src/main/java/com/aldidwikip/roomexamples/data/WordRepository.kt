@@ -8,6 +8,8 @@ class WordRepository(private val wordDao: WordDao) {
 
     val allWords: LiveData<List<Word>> = wordDao.getAlphabetizedWords()
 
+    fun getWord(id: Int): LiveData<Word> = wordDao.getWord(id)
+
     suspend fun insert(word: Word) {
         wordDao.insert(word)
     }

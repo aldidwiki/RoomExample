@@ -1,82 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <EditText
-        android:id="@+id/edit_name"
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.aldidwikip.roomexamples.ui.edit.EditViewModel" />
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/big_padding"
-        android:fontFamily="sans-serif-light"
-        android:hint="@string/hint_name"
-        android:inputType="textCapWords"
-        android:minHeight="@dimen/min_height"
-        android:textSize="18sp" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <RadioGroup
-        android:id="@+id/rb_group_gender"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/big_padding"
-        android:checkedButton="@id/rb_male"
-        android:minHeight="@dimen/min_height"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/edit_name"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/big_padding"
             android:fontFamily="sans-serif-light"
-            android:text="@string/gender"
+            android:hint="@string/hint_name"
+            android:inputType="textCapWords"
+            android:minHeight="@dimen/min_height"
+            android:text="@{viewModel.name}"
             android:textSize="18sp" />
 
-        <RadioButton
-            android:id="@+id/rb_male"
+        <RadioGroup
+            android:id="@+id/rb_group_gender"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:fontFamily="sans-serif-light"
-            android:text="@string/male" />
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/big_padding"
+            android:minHeight="@dimen/min_height"
+            android:orientation="horizontal"
+            app:checkedButton="@{viewModel.checkedButton}">
 
-        <RadioButton
-            android:id="@+id/rb_female"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:text="@string/gender"
+                android:textSize="18sp" />
+
+            <RadioButton
+                android:id="@+id/rb_male"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-light"
+                android:text="@string/male" />
+
+            <RadioButton
+                android:id="@+id/rb_female"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:fontFamily="sans-serif-light"
+                android:text="@string/female" />
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/edit_job"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.5"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/big_padding"
             android:fontFamily="sans-serif-light"
-            android:text="@string/female" />
-    </RadioGroup>
+            android:hint="@string/hint_job"
+            android:inputType="textCapWords"
+            android:minHeight="@dimen/min_height"
+            android:text="@{viewModel.job}"
+            android:textSize="18sp" />
 
-    <EditText
-        android:id="@+id/edit_job"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/big_padding"
-        android:fontFamily="sans-serif-light"
-        android:hint="@string/hint_job"
-        android:inputType="textCapWords"
-        android:minHeight="@dimen/min_height"
-        android:textSize="18sp" />
+        <EditText
+            android:id="@+id/edit_city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/big_padding"
+            android:fontFamily="sans-serif-light"
+            android:hint="@string/hint_city"
+            android:inputType="textCapWords"
+            android:minHeight="@dimen/min_height"
+            android:text="@{viewModel.city}"
+            android:textSize="18sp" />
 
-    <EditText
-        android:id="@+id/edit_city"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/big_padding"
-        android:fontFamily="sans-serif-light"
-        android:hint="@string/hint_city"
-        android:inputType="textCapWords"
-        android:minHeight="@dimen/min_height"
-        android:textSize="18sp" />
+        <Button
+            android:id="@+id/button_save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/big_padding"
+            android:background="@color/colorPrimary"
+            android:text="@string/button_save"
+            android:textColor="@color/buttonLabel" />
 
-    <Button
-        android:id="@+id/button_save"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/big_padding"
-        android:background="@color/colorPrimary"
-        android:text="@string/button_save"
-        android:textColor="@color/buttonLabel" />
-
-</LinearLayout>
+    </LinearLayout>
+</layout>

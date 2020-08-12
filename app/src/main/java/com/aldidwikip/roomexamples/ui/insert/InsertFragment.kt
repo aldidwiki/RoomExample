@@ -18,7 +18,9 @@ import kotlinx.android.synthetic.main.fragment_insert.*
 
 class InsertFragment : Fragment() {
     private lateinit var navController: NavController
-    private lateinit var insertViewModel: InsertViewModel
+    private val insertViewModel: InsertViewModel by lazy {
+        ViewModelProvider(this).get(InsertViewModel::class.java)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -27,7 +29,6 @@ class InsertFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        insertViewModel = ViewModelProvider(this).get(InsertViewModel::class.java)
         navController = Navigation.findNavController(view)
 
         button_save.setOnClickListener {
@@ -36,16 +37,10 @@ class InsertFragment : Fragment() {
                 TextUtils.isEmpty(edit_job.text) -> edit_job.showErrorMessage()
                 TextUtils.isEmpty(edit_city.text) -> edit_city.showErrorMessage()
                 else -> {
-                    val gender = if (rb_male.isChecked) {
-                        rb_male.text.toString()
-                    } else {
-                        rb_female.text.toString()
-                    }
-
                     val word = Word(
                             0,
                             edit_name.text.toString(),
-                            gender,
+                            if (rb_male.isChecked) rb_male.text.toString() else rb_female.text.toString(),
                             edit_job.text.toString(),
                             edit_city.text.toString()
                     )

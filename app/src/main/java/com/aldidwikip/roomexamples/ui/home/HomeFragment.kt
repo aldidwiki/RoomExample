@@ -20,16 +20,14 @@ import com.aldidwikip.roomexamples.R
 import com.aldidwikip.roomexamples.RoomExample
 import com.aldidwikip.roomexamples.data.model.Word
 import com.aldidwikip.roomexamples.ui.adapter.WordListAdapter
-import com.aldidwikip.roomexamples.utils.Constant.ARG_CITY
-import com.aldidwikip.roomexamples.utils.Constant.ARG_GENDER
 import com.aldidwikip.roomexamples.utils.Constant.ARG_ID
-import com.aldidwikip.roomexamples.utils.Constant.ARG_JOB
-import com.aldidwikip.roomexamples.utils.Constant.ARG_NAME
 import kotlinx.android.synthetic.main.custom_bottom_sheet.*
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment(), WordListAdapter.OnItemClickCallback {
-    private lateinit var homeViewModel: HomeViewModel
+    private val homeViewModel: HomeViewModel by lazy {
+        ViewModelProvider(this).get(HomeViewModel::class.java)
+    }
     private lateinit var navController: NavController
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -39,7 +37,6 @@ class HomeFragment : Fragment(), WordListAdapter.OnItemClickCallback {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         navController = Navigation.findNavController(view)
 
         val rvAdapter = WordListAdapter(RoomExample.context)
@@ -73,13 +70,7 @@ class HomeFragment : Fragment(), WordListAdapter.OnItemClickCallback {
             }
 
             action_edit.setOnClickListener {
-                val bundle = bundleOf(
-                        ARG_ID to data.id,
-                        ARG_GENDER to data.gender,
-                        ARG_NAME to data.name,
-                        ARG_JOB to data.job,
-                        ARG_CITY to data.city
-                )
+                val bundle = bundleOf(ARG_ID to data.id)
                 navController.navigate(R.id.action_homeFragment_to_editFragment, bundle)
                 dismiss()
             }

@@ -1,44 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="6dp"
-    app:cardElevation="4dp">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
+    <data>
+
+        <variable
+            name="wordData"
+            type="com.aldidwikip.roomexamples.data.model.Word" />
+    </data>
+
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_margin="8dp"
+        app:cardCornerRadius="6dp"
+        app:cardElevation="4dp">
 
-        <TextView
-            android:id="@+id/tv_name"
-            style="@style/word_title"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="Name" />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_gender"
-            style="@style/word_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="Gender" />
+            <TextView
+                android:id="@+id/tv_name"
+                style="@style/word_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{wordData.name}"
+                tools:text="Name" />
 
-        <TextView
-            android:id="@+id/tv_job"
-            style="@style/word_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="@string/job" />
+            <TextView
+                android:id="@+id/tv_gender"
+                style="@style/word_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{wordData.gender}"
+                tools:text="Gender" />
 
-        <TextView
-            android:id="@+id/tv_city"
-            style="@style/word_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="City" />
-    </LinearLayout>
-</androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/tv_job"
+                style="@style/word_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{wordData.job}"
+                tools:text="@string/job" />
+
+            <TextView
+                android:id="@+id/tv_city"
+                style="@style/word_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{wordData.city}"
+                tools:text="City" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

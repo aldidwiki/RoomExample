@@ -13,6 +13,9 @@ interface WordDao {
     @Query("SELECT * FROM word_table ORDER BY name ASC")
     fun getAlphabetizedWords(): LiveData<List<Word>>
 
+    @Query("SELECT * FROM word_table WHERE id = :id")
+    fun getWord(id: Int): LiveData<Word>
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(word: Word)
 

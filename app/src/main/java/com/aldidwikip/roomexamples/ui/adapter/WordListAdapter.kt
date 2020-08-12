@@ -2,15 +2,17 @@ package com.aldidwikip.roomexamples.ui.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.aldidwikip.roomexamples.R
 import com.aldidwikip.roomexamples.data.model.Word
+import com.aldidwikip.roomexamples.databinding.RecyclerviewItemBinding
 
 class WordListAdapter internal constructor(context: Context) :
-        RecyclerView.Adapter<WordListAdapter.WordViewHolder>() {
+        ListAdapter<Word, WordListAdapter.WordViewHolder>(DIFF_CALLBACK) {
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     private var words = emptyList<Word>()
@@ -21,8 +23,9 @@ class WordListAdapter internal constructor(context: Context) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WordViewHolder {
-        val itemView = inflater.inflate(R.layout.recyclerview_item, parent, false)
-        return WordViewHolder(itemView)
+        val itemBinding: RecyclerviewItemBinding =
+                DataBindingUtil.inflate(inflater, R.layout.recyclerview_item, parent, false)
+        return WordViewHolder(itemBinding)
     }
 
     override fun getItemCount() = words.size
@@ -43,21 +46,30 @@ class WordListAdapter internal constructor(context: Context) :
         notifyDataSetChanged()
     }
 
-    inner class WordViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val nameItemView: TextView = itemView.findViewById(R.id.tv_name)
-        private val genderItemView: TextView = itemView.findViewById(R.id.tv_gender)
-        private val jobItemView: TextView = itemView.findViewById(R.id.tv_job)
-        private val cityItemView: TextView = itemView.findViewById(R.id.tv_city)
+    inner class WordViewHolder(private val binding: RecyclerviewItemBinding)
+        : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(data: Word) {
-            nameItemView.text = data.name
-            genderItemView.text = data.gender
-            jobItemView.text = data.job
-            cityItemView.text = data.city
+            binding.apply {
+                wordData = data
+                executePendingBindings()
+            }
         }
     }
 
     interface OnItemClickCallback {
         fun onItemClick(data: Word)
+    }
+
+    companion object {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Word>() {
+            override fun areItemsTheSame(oldItem: Word, newItem: Word): Boolean {
+                return oldItem.id == newItem.id
+            }
+
+            override fun areContentsTheSame(oldItem: Word, newItem: Word): Boolean {
+                return oldItem == newItem
+            }
+        }
     }
 }
