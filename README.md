@@ -9,3 +9,4 @@ Contoh aplikasi CRUD sederhana menggunakan library Room berdasarkan Codelab dari
 - [Kotlin Coroutines](https://developer.android.com/topic/libraries/architecture/coroutines)
 - [Material Design](https://material.io/collections/get-started/#android)
 - [Material Dialogs](https://github.com/afollestad/material-dialogs)
+- [DataBinding](https://developer.android.com/topic/libraries/data-binding)
