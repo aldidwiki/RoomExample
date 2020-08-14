@@ -7,20 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.aldidwikip.roomexamples.R
 import com.aldidwikip.roomexamples.RoomExample
 import com.aldidwikip.roomexamples.data.model.Word
 import com.aldidwikip.roomexamples.utils.AppUtils.showErrorMessage
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_insert.*
 
+@AndroidEntryPoint
 class InsertFragment : Fragment() {
     private lateinit var navController: NavController
-    private val insertViewModel: InsertViewModel by lazy {
-        ViewModelProvider(this).get(InsertViewModel::class.java)
-    }
+    private val insertViewModel: InsertViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment

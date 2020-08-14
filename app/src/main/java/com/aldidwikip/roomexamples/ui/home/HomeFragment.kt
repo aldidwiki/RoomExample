@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,13 +21,13 @@ import com.aldidwikip.roomexamples.RoomExample
 import com.aldidwikip.roomexamples.data.model.Word
 import com.aldidwikip.roomexamples.ui.adapter.WordListAdapter
 import com.aldidwikip.roomexamples.utils.Constant.ARG_ID
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.custom_bottom_sheet.*
 import kotlinx.android.synthetic.main.fragment_home.*
 
+@AndroidEntryPoint
 class HomeFragment : Fragment(), WordListAdapter.OnItemClickCallback {
-    private val homeViewModel: HomeViewModel by lazy {
-        ViewModelProvider(this).get(HomeViewModel::class.java)
-    }
+    private val homeViewModel: HomeViewModel by viewModels()
     private lateinit var navController: NavController
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -49,7 +49,7 @@ class HomeFragment : Fragment(), WordListAdapter.OnItemClickCallback {
         homeViewModel.allWords.observe(viewLifecycleOwner, Observer { words ->
             // Update the cached copy of the words in the adapter.
             words?.let {
-                rvAdapter.setWords(it)
+                rvAdapter.submitList(it)
             }
         })
 

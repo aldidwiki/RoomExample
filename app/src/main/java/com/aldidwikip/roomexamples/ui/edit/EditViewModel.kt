@@ -1,17 +1,14 @@
 package com.aldidwikip.roomexamples.ui.edit
 
-import android.app.Application
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.viewModelScope
+import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.*
 import com.aldidwikip.roomexamples.R
+import com.aldidwikip.roomexamples.data.WordRepository
 import com.aldidwikip.roomexamples.data.model.Word
-import com.aldidwikip.roomexamples.ui.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class EditViewModel(application: Application) : BaseViewModel(application) {
+class EditViewModel @ViewModelInject constructor(private val repository: WordRepository) : ViewModel() {
     private val _name = MutableLiveData<String>()
     private val _gender = MutableLiveData<String>()
     private val _job = MutableLiveData<String>()

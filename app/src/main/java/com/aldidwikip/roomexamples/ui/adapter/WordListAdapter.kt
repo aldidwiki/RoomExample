@@ -15,7 +15,6 @@ class WordListAdapter internal constructor(context: Context) :
         ListAdapter<Word, WordListAdapter.WordViewHolder>(DIFF_CALLBACK) {
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
-    private var words = emptyList<Word>()
     private lateinit var onItemClickCallback: OnItemClickCallback
 
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
@@ -28,22 +27,15 @@ class WordListAdapter internal constructor(context: Context) :
         return WordViewHolder(itemBinding)
     }
 
-    override fun getItemCount() = words.size
-
     override fun onBindViewHolder(holder: WordViewHolder, position: Int) {
-        val current = words[position]
+        val current = getItem(position)
         with(holder) {
             bind(current)
 
             itemView.setOnClickListener {
-                onItemClickCallback.onItemClick(words[adapterPosition])
+                onItemClickCallback.onItemClick(getItem(adapterPosition))
             }
         }
-    }
-
-    internal fun setWords(words: List<Word>) {
-        this.words = words
-        notifyDataSetChanged()
     }
 
     inner class WordViewHolder(private val binding: RecyclerviewItemBinding)
